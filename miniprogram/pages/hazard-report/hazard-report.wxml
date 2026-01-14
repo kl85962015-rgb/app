@@ -1,0 +1,144 @@
+<!--pages/hazard-report/hazard-report.wxml-->
+<!-- 新增随手拍 - 参考竞品优化版 -->
+<view class="page-container">
+  <!-- 已添加的隐患数量提示 -->
+  <view class="hazard-count-bar" wx:if="{{hazardList.length > 0}}">
+    <text class="count-icon">📋</text>
+    <text class="count-text">已添加 <text class="count-number">{{hazardList.length}}</text> 个隐患</text>
+  </view>
+
+  <!-- 图片上传区 -->
+  <view class="form-section">
+    <view class="section-label">
+      <text>隐患照片</text>
+      <text class="required">*</text>
+    </view>
+    <view class="image-grid">
+      <view class="image-item" wx:for="{{images}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"></image>
+        <view class="image-delete" catchtap="deleteImage" data-index="{{index}}">✕</view>
+      </view>
+      <view class="image-add" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加照片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 隐患描述 -->
+  <view class="form-section">
+    <view class="section-label">
+      <text>隐患描述</text>
+      <text class="required">*</text>
+    </view>
+    <textarea 
+      class="form-textarea" 
+      placeholder="请输入或选择"
+      value="{{description}}"
+      bindinput="onDescriptionInput"
+    ></textarea>
+  </view>
+
+  <!-- 整改建议 -->
+  <view class="form-section">
+    <view class="section-label-row">
+      <text>整改建议</text>
+      <view class="quick-links">
+        <text class="quick-link blue" bindtap="goToSelectRegulation">△ 从依据库选择</text>
+        <text class="quick-link orange" bindtap="goToSelectChecklist">▲ 从检查表选择</text>
+      </view>
+    </view>
+    <textarea 
+      class="form-textarea" 
+      placeholder="请输入或选择"
+      value="{{suggestion}}"
+      bindinput="onSuggestionInput"
+    ></textarea>
+    <view class="source-info" wx:if="{{selectedRegulation}}">
+      <text class="source-label">依据来源：</text>
+      <text class="source-value">{{selectedRegulation.source}}</text>
+    </view>
+  </view>
+
+  <!-- 隐患分类 -->
+  <view class="form-row" bindtap="showCategoryPicker">
+    <text class="row-label">隐患分类<text class="required">*</text></text>
+    <text class="row-value" wx:if="{{category}}">{{category}}</text>
+    <text class="row-placeholder" wx:else>请选择</text>
+    <text class="row-arrow">›</text>
+  </view>
+
+  <!-- 隐患性质 -->
+  <view class="form-row">
+    <text class="row-label">隐患性质</text>
+    <view class="radio-group">
+      <view class="radio-item {{level === 'general' ? 'active' : ''}}" bindtap="selectLevel" data-level="general">
+        <view class="radio-dot {{level === 'general' ? 'checked' : ''}}"></view>
+        <text>一般隐患</text>
+      </view>
+      <view class="radio-item {{level === 'major' ? 'active' : ''}}" bindtap="selectLevel" data-level="major">
+        <view class="radio-dot {{level === 'major' ? 'checked' : ''}}"></view>
+        <text>重大隐患</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 整改期限 -->
+  <view class="form-section">
+    <view class="form-row" style="border: none; padding: 0;">
+      <text class="row-label">整改期限<text class="required">*</text></text>
+      <picker mode="date" value="{{deadline}}" start="{{today}}" bindchange="onDeadlineChange">
+        <text class="row-value" wx:if="{{deadline}}">{{deadline}}</text>
+        <text class="row-placeholder" wx:else>未设定</text>
+      </picker>
+      <text class="row-arrow">›</text>
+    </view>
+    <view class="quick-deadline">
+      <text class="quick-label">快捷选择：</text>
+      <view class="quick-options">
+        <view class="quick-option {{deadlineType === 'week' ? 'active' : ''}}" bindtap="setQuickDeadline" data-type="week">一周</view>
+        <view class="quick-option {{deadlineType === 'twoweek' ? 'active' : ''}}" bindtap="setQuickDeadline" data-type="twoweek">两周</view>
+        <view class="quick-option {{deadlineType === 'month' ? 'active' : ''}}" bindtap="setQuickDeadline" data-type="month">一个月</view>
+        <view class="quick-option {{deadlineType === 'threemonth' ? 'active' : ''}}" bindtap="setQuickDeadline" data-type="threemonth">三个月</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 位置信息 -->
+  <view class="form-row">
+    <text class="row-label">位置</text>
+    <input class="row-input" placeholder="请输入隐患位置" value="{{locationDetail}}" bindinput="onLocationDetailInput" />
+  </view>
+
+  <!-- 底部操作区 -->
+  <view class="action-area">
+    <button class="action-btn outline" bindtap="saveAndClose" disabled="{{submitting}}">
+      保存并关闭
+    </button>
+    <button class="action-btn primary" bindtap="saveAndContinue" disabled="{{submitting}}">
+      保存并继续
+    </button>
+  </view>
+</view>
+
+<!-- 分类选择弹窗 -->
+<view class="picker-mask" wx:if="{{showCategoryModal}}" bindtap="hideCategoryPicker"></view>
+<view class="picker-popup {{showCategoryModal ? 'show' : ''}}">
+  <view class="picker-header">
+    <text class="picker-cancel" bindtap="hideCategoryPicker">取消</text>
+    <text class="picker-title">选择隐患分类</text>
+    <text class="picker-confirm" bindtap="confirmCategory">确定</text>
+  </view>
+  <view class="picker-content">
+    <view 
+      class="picker-item {{category === item ? 'active' : ''}}" 
+      wx:for="{{categories}}" 
+      wx:key="*this"
+      bindtap="selectCategory"
+      data-category="{{item}}"
+    >
+      <text>{{item}}</text>
+      <text class="picker-check" wx:if="{{category === item}}">✓</text>
+    </view>
+  </view>
+</view>

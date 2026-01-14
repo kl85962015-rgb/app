@@ -1,0 +1,89 @@
+<!--pages/task/task.wxml-->
+<!-- 任务管理页面 - 优化版 -->
+<view class="page-container">
+  <!-- 标签栏 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+      <text class="tab-text">全部</text>
+      <text class="tab-count">{{taskCounts.all}}</text>
+    </view>
+    <view class="tab-item {{currentTab === 'pending' ? 'active' : ''}}" bindtap="switchTab" data-tab="pending">
+      <text class="tab-text">待执行</text>
+      <text class="tab-count warning">{{taskCounts.pending}}</text>
+    </view>
+    <view class="tab-item {{currentTab === 'processing' ? 'active' : ''}}" bindtap="switchTab" data-tab="processing">
+      <text class="tab-text">进行中</text>
+      <text class="tab-count primary">{{taskCounts.processing}}</text>
+    </view>
+    <view class="tab-item {{currentTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">
+      <text class="tab-text">已完成</text>
+      <text class="tab-count success">{{taskCounts.completed}}</text>
+    </view>
+  </view>
+
+  <!-- 任务列表 -->
+  <scroll-view class="task-list" scroll-y refresher-enabled bindrefresherrefresh="onRefresh" refresher-triggered="{{refreshing}}">
+    <view class="task-item card" wx:for="{{tasks}}" wx:key="id" bindtap="goToTaskDetail" data-id="{{item.id}}">
+      <!-- 任务头部 -->
+      <view class="task-header">
+        <view class="task-status-badge {{item.status}}">
+          <text>{{item.status === 'pending' ? '⏳ 待执行' : item.status === 'processing' ? '🔄 进行中' : '✅ 已完成'}}</text>
+        </view>
+        <text class="task-date">{{item.createDate}}</text>
+      </view>
+      
+      <!-- 任务标题 -->
+      <text class="task-title">{{item.title}}</text>
+      
+      <!-- 任务信息 -->
+      <view class="task-info-grid">
+        <view class="task-info-item">
+          <text class="info-icon">🏢</text>
+          <text class="info-text">{{item.enterpriseName}}</text>
+        </view>
+        <view class="task-info-item">
+          <text class="info-icon">👤</text>
+          <text class="info-text">{{item.assigneeName}}</text>
+        </view>
+        <view class="task-info-item">
+          <text class="info-icon">📅</text>
+          <text class="info-text deadline {{item.isUrgent ? 'urgent' : ''}}">截止: {{item.deadline}}</text>
+        </view>
+      </view>
+      
+      <!-- 进度条 -->
+      <view class="progress-section" wx:if="{{item.status !== 'completed'}}">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{item.progress}}%"></view>
+        </view>
+        <text class="progress-text">{{item.progress}}%</text>
+      </view>
+      
+      <!-- 任务底部 -->
+      <view class="task-footer">
+        <view class="hazard-count">
+          <text class="hazard-icon">⚠️</text>
+          <text>发现 {{item.hazardCount}} 个隐患</text>
+        </view>
+        <view class="task-action" wx:if="{{item.status === 'pending'}}" catchtap="startTask" data-id="{{item.id}}">
+          <text>开始执行 ›</text>
+        </view>
+        <view class="task-action" wx:elif="{{item.status === 'processing'}}" catchtap="continueTask" data-item="{{item}}">
+          <text>继续排查 ›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{tasks.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-title">暂无任务</text>
+      <text class="empty-desc">点击下方按钮创建新的排查任务</text>
+    </view>
+  </scroll-view>
+
+  <!-- 创建任务按钮 -->
+  <view class="fab" bindtap="goToCreateTask">
+    <text class="fab-icon">+</text>
+  </view>
+</view>

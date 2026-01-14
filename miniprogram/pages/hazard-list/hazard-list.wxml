@@ -1,0 +1,42 @@
+<!--pages/hazard-list/hazard-list.wxml-->
+<view class="page-container">
+  
+  <!-- 顶部筛选 Tab -->
+  <view class="filter-tabs">
+    <view class="tab-pill {{currentFilter === 'all' ? 'active' : ''}}" bindtap="setFilter" data-status="all">全部</view>
+    <view class="tab-pill {{currentFilter === 'pending' ? 'active' : ''}}" bindtap="setFilter" data-status="pending">待整改</view>
+    <view class="tab-pill {{currentFilter === 'rectified' ? 'active' : ''}}" bindtap="setFilter" data-status="rectified">待验收</view>
+    <view class="tab-pill {{currentFilter === 'completed' ? 'active' : ''}}" bindtap="setFilter" data-status="completed">已闭环</view>
+  </view>
+
+  <!-- 隐患列表 -->
+  <view class="hazard-list">
+    <block wx:if="{{filteredHazards.length > 0}}">
+      <view class="hazard-card" wx:for="{{filteredHazards}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+        <view class="card-status-stripe {{item.status}}"></view>
+        <view class="card-body">
+          <image class="thumb-img" src="{{item.photos[0]}}" mode="aspectFill"></image>
+          <view class="card-content">
+            <text class="hazard-ent">{{item.enterpriseName}}</text>
+            <text class="hazard-desc">{{item.description}}</text>
+            <view class="tags-row">
+              <text class="tag-mini {{item.level === 'major' ? 'tag-level' : 'tag-level-gen'}}">{{item.level === 'major' ? '重大' : '一般'}}</text>
+              <text class="tag-mini tag-status {{item.status}}">{{statusMap[item.status]}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="card-footer">
+          <text class="time-txt">{{item.createTimeFormatted}}</text>
+          <view class="detail-link">查看详情 ›</view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-tip" wx:else style="text-align: center; padding-top: 100rpx; color: #94A3B8;">
+      <text style="display: block; font-size: 60rpx; margin-bottom: 20rpx;">🍃</text>
+      <text>暂无相关隐患记录</text>
+    </view>
+  </view>
+
+</view>

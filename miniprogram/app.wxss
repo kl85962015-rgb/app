@@ -1,0 +1,213 @@
+/* app.wxss */
+/* ================================================ */
+/* 全局样式 - Luminous Light (光感科技融合版)         */
+/* 结合了 Clean Air 的通透留白与 Deep Ocean 的科技配色 */
+/* ================================================ */
+
+page {
+  /* === 色彩系统 === */
+  /* 背景：极浅的科技灰蓝 */
+  --bg-base: #F8FAFC; 
+  --bg-gradient: linear-gradient(180deg, #F1F5F9 0%, #F8FAFC 100%);
+  
+  /* 卡片：纯白 + 极致光感 */
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --card-border: 1px solid rgba(226, 232, 240, 0.8);
+
+  /* 核心主色：Deep Ocean 的遗留，保持科技感 */
+  --brand-blue: #2563EB;     /* 专业蓝 */
+  --brand-cyan: #0891B2;     /* 科技青 */
+  --brand-dark: #0F172A;     /* 深邃黑（用于标题） */
+
+  /* 辅助霓虹（作为点缀） */
+  --accent-cyan: #E0F2FE;    /* 浅青背景 */
+  --accent-blue: #DBEAFE;    /* 浅蓝背景 */
+  --accent-orange: #FFEDD5;  /* 浅橙背景 */
+  --text-on-accent-cyan: #0E7490;
+  --text-on-accent-blue: #1E40AF;
+  --text-on-accent-orange: #C2410C;
+
+  /* 文字系统 */
+  --text-title: #0F172A;     /* 近乎纯黑 */
+  --text-body: #334155;      /* 深灰 */
+  --text-sub: #64748B;       /* 中灰 */
+  --text-placeholder: #94A3B8;
+
+  /* 圆角 */
+  --radius-sm: 12rpx;
+  --radius-md: 20rpx;
+  --radius-lg: 32rpx;
+  --radius-xl: 48rpx;
+
+  /* 字体 */
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--text-body);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-container {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+/* === 核心组件：光感卡片 === */
+.light-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.light-card:active {
+  transform: translateY(2rpx);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* === 按钮：流光科技 === */
+.btn-tech {
+  background: var(--brand-dark);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tech::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: translateX(-100%);
+}
+
+.btn-tech:active {
+  transform: scale(0.98);
+}
+
+/* === CSS 几何图标系统 (Geometry Icons) === */
+/* 基础类 */
+.geo-icon {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rpx;
+  position: relative;
+}
+
+/* 1. 企业库图标：堆叠的楼层 */
+.icon-enterprise-bg {
+  background: var(--accent-blue);
+  color: var(--text-on-accent-blue);
+}
+.geo-enterprise {
+  width: 32rpx;
+  height: 32rpx;
+  background: currentColor;
+  border-radius: 4rpx;
+  position: relative;
+  box-shadow: -6rpx 6rpx 0 rgba(30, 64, 175, 0.2);
+}
+.geo-enterprise::before {
+  content: '';
+  position: absolute;
+  top: -10rpx;
+  left: 10rpx;
+  width: 12rpx;
+  height: 6rpx;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* 2. 隐患库图标：闪电/警示 */
+.icon-hazard-bg {
+  background: var(--accent-orange);
+  color: var(--text-on-accent-orange);
+}
+.geo-hazard {
+  width: 0;
+  height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-bottom: 30rpx solid currentColor;
+  position: relative;
+}
+.geo-hazard::after {
+  content: '!';
+  position: absolute;
+  top: 6rpx;
+  left: -4rpx;
+  font-size: 20rpx;
+  font-weight: 900;
+  color: #FFF;
+}
+
+/* 3. 报告图标：数据折线 */
+.icon-report-bg {
+  background: var(--accent-cyan);
+  color: var(--text-on-accent-cyan);
+}
+.geo-report {
+  width: 32rpx;
+  height: 4rpx;
+  background: currentColor;
+  position: relative;
+  transform: translateY(6rpx);
+}
+.geo-report::before {
+  content: '';
+  position: absolute;
+  bottom: 8rpx;
+  left: 0;
+  width: 10rpx;
+  height: 16rpx;
+  background: currentColor;
+  opacity: 0.5;
+}
+.geo-report::after {
+  content: '';
+  position: absolute;
+  bottom: 8rpx;
+  right: 0;
+  width: 10rpx;
+  height: 24rpx;
+  background: currentColor;
+}
+
+/* 4. 火箭图标 (Start) */
+.geo-rocket {
+  font-size: 40rpx; /* 这里为了生动，启动按钮还是可以用 emoji 配合 CSS 阴影，或者用图片 */
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+/* === 数据数字 === */
+.num-display {
+  font-family: 'DIN Alternate', 'Roboto', sans-serif;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: -1px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #E2E8F0;
+}

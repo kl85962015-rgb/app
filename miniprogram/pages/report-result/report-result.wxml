@@ -1,0 +1,55 @@
+<!--pages/report-result/report-result.wxml-->
+<view class="page-container">
+  
+  <!-- 报告头部 -->
+  <view class="report-header">
+    <view class="report-status {{report.hazards.length === 0 ? 'safe' : 'warning'}}">
+      <text class="status-icon">{{report.hazards.length === 0 ? '🛡️' : '⚠️'}}</text>
+      <text class="status-msg">{{report.hazards.length === 0 ? '检查合格' : '发现隐患'}}</text>
+    </view>
+    <view class="report-title">{{report.enterpriseName}}</view>
+    <view class="report-meta">
+      <text>{{report.createTime}} 生成</text>
+    </view>
+  </view>
+
+  <!-- 统计摘要 -->
+  <view class="summary-section">
+    <view class="light-card summary-card">
+      <view class="sum-item">
+        <text class="sum-val">{{report.hazards.length}}</text>
+        <text class="sum-key">隐患总数</text>
+      </view>
+      <view class="vert-div"></view>
+      <view class="sum-item">
+        <text class="sum-val is-major">{{majorCount}}</text>
+        <text class="sum-key">重大隐患</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 隐患清单 -->
+  <view class="list-section">
+    <view class="sec-label">详细清单 / DETAILED LIST</view>
+    <block wx:for="{{report.hazards}}" wx:key="index">
+      <view class="light-card list-row-card">
+        <image src="{{item.photos[0]}}" mode="aspectFill" class="row-thumb"></image>
+        <view class="row-content">
+          <view class="row-top">
+            <text class="row-loc">{{item.location || '位置未记录'}}</text>
+            <text class="lvl-tag {{item.level}}">{{item.level === 'major' ? '重大' : '一般'}}</text>
+          </view>
+          <text class="row-desc">{{item.description}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部导出 -->
+  <view class="footer-bar">
+    <view class="export-btn" bindtap="exportReport">
+      <text>📤 导出/保存报告图片</text>
+    </view>
+  </view>
+
+</view>

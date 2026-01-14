@@ -1,0 +1,254 @@
+/* pages/task/task.wxss */
+/* 任务管理页面样式 - 优化版 */
+
+.page-container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标签栏 */
+.tab-bar {
+  display: flex;
+  background: #FFFFFF;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 0;
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, rgba(30, 58, 95, 0.12) 100%);
+}
+
+.tab-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 6rpx;
+}
+
+.tab-item.active .tab-text {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tab-count {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tab-count.warning { color: var(--warning-color); }
+.tab-count.primary { color: var(--primary-color); }
+.tab-count.success { color: var(--success-color); }
+
+/* 任务列表 */
+.task-list {
+  flex: 1;
+  padding: 24rpx;
+  padding-bottom: 200rpx;
+}
+
+.task-item {
+  margin-bottom: 20rpx;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.task-status-badge {
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.task-status-badge.pending {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  color: #E65100;
+}
+
+.task-status-badge.processing {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  color: #1565C0;
+}
+
+.task-status-badge.completed {
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+  color: #2E7D32;
+}
+
+.task-date {
+  font-size: 24rpx;
+  color: var(--text-placeholder);
+}
+
+.task-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20rpx;
+  line-height: 1.4;
+}
+
+/* 任务信息网格 */
+.task-info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.task-info-item {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.info-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.info-text.deadline.urgent {
+  color: var(--danger-color);
+  font-weight: 500;
+}
+
+/* 进度条 */
+.progress-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 12rpx;
+  background: #E8E8E8;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  border-radius: 6rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: var(--primary-color);
+  font-weight: 600;
+  min-width: 60rpx;
+  text-align: right;
+}
+
+/* 任务底部 */
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border-color);
+}
+
+.hazard-count {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.hazard-icon {
+  margin-right: 8rpx;
+}
+
+.task-action {
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.task-action:active {
+  transform: scale(0.98);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 48rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-title {
+  font-size: 34rpx;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: var(--text-placeholder);
+  text-align: center;
+}
+
+/* 浮动按钮 */
+.fab {
+  position: fixed;
+  right: 32rpx;
+  bottom: 200rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(30, 58, 95, 0.4);
+  z-index: 100;
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+.fab-icon {
+  font-size: 56rpx;
+  color: #FFFFFF;
+  font-weight: 300;
+  line-height: 1;
+}

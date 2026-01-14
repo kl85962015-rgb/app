@@ -1,0 +1,129 @@
+/* pages/hazard-detail/hazard-detail.wxss */
+/* 隐患详情 - Luminous Light */
+
+.page-container {
+  padding-bottom: 200rpx;
+}
+
+/* 顶部状态栏 */
+.status-header {
+  padding: 40rpx 36rpx;
+  background: #FFF;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-label-lg {
+  font-size: 40rpx;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.status-label-lg.pending { color: var(--neon-orange); }
+.status-label-lg.rectified { color: var(--neon-cyan); }
+.status-label-lg.completed { color: var(--neon-green); }
+
+.time-badge {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  background: #F1F5F9;
+  padding: 8rpx 20rpx;
+  border-radius: 100rpx;
+}
+
+/* 详情内容 */
+.detail-body {
+  padding: 30rpx 36rpx;
+}
+
+.detail-card {
+  background: #FFF;
+  border-radius: var(--radius-md);
+  padding: 32rpx;
+  margin-bottom: 30rpx;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.field-group {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  font-size: 22rpx;
+  color: var(--text-sub);
+  margin-bottom: 8rpx;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.field-content {
+  font-size: 30rpx;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.field-content-bold {
+  font-size: 32rpx;
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+/* 照片轮播 */
+.photo-swiper {
+  width: 100%;
+  height: 450rpx;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 底部操作 */
+.action-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFF;
+  padding: 30rpx 40rpx calc(30rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+  display: flex;
+  gap: 24rpx;
+  z-index: 100;
+}
+
+.dock-btn {
+  flex: 1;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 30rpx;
+}
+
+.btn-upload {
+  background: var(--brand-dark);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.btn-pass {
+  background: var(--neon-green);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-reject {
+  background: #FEE2E2;
+  color: #DC2626;
+}

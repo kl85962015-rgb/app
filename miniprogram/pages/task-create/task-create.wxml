@@ -1,0 +1,98 @@
+<!--pages/task-create/task-create.wxml-->
+<!-- 创建任务页面 -->
+<view class="page-container">
+  <!-- 选择企业 -->
+  <view class="form-section card">
+    <view class="section-title">
+      <text class="required">*</text>
+      <text>选择企业</text>
+    </view>
+    
+    <view class="enterprise-selected" wx:if="{{selectedEnterprise}}" bindtap="goToSelectEnterprise">
+      <view class="enterprise-info">
+        <text class="enterprise-name">{{selectedEnterprise.name}}</text>
+        <text class="enterprise-code">{{selectedEnterprise.creditCode}}</text>
+      </view>
+      <view class="enterprise-change">
+        <text>更换</text>
+        <image src="/assets/icons/arrow-right.png"></image>
+      </view>
+    </view>
+    
+    <view class="select-btn" wx:else bindtap="goToSelectEnterprise">
+      <image src="/assets/icons/building-gray.png" class="select-icon"></image>
+      <text>选择检查企业</text>
+      <image src="/assets/icons/arrow-right.png" class="arrow-icon"></image>
+    </view>
+  </view>
+
+  <!-- 任务标题 -->
+  <view class="form-section card">
+    <view class="section-title">
+      <text class="required">*</text>
+      <text>任务标题</text>
+    </view>
+    <input 
+      class="form-input" 
+      placeholder="请输入任务标题"
+      value="{{title}}"
+      bindinput="onTitleInput"
+    />
+  </view>
+
+  <!-- 任务内容 -->
+  <view class="form-section card">
+    <view class="section-title">
+      <text>任务内容</text>
+      <text class="optional">（选填）</text>
+    </view>
+    <textarea 
+      class="form-textarea" 
+      placeholder="请输入检查要求、注意事项等..."
+      maxlength="500"
+      value="{{content}}"
+      bindinput="onContentInput"
+    ></textarea>
+  </view>
+
+  <!-- 执行人 -->
+  <view class="form-section card">
+    <view class="section-title">
+      <text class="required">*</text>
+      <text>执行人</text>
+    </view>
+    
+    <picker mode="selector" range="{{userList}}" range-key="name" bindchange="onAssigneeChange">
+      <view class="picker-row">
+        <text class="picker-text {{assignee ? '' : 'placeholder'}}">
+          {{assignee.name || '选择任务执行人'}}
+        </text>
+        <image src="/assets/icons/arrow-down.png" class="arrow-down"></image>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 截止日期 -->
+  <view class="form-section card">
+    <view class="section-title">
+      <text class="required">*</text>
+      <text>截止日期</text>
+    </view>
+    
+    <picker mode="date" value="{{deadline}}" start="{{today}}" bindchange="onDeadlineChange">
+      <view class="picker-row">
+        <text class="picker-text {{deadline ? '' : 'placeholder'}}">
+          {{deadline || '选择截止日期'}}
+        </text>
+        <image src="/assets/icons/calendar.png" class="calendar-icon"></image>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button class="btn btn-primary submit-btn" bindtap="submitTask" disabled="{{submitting}}">
+      {{submitting ? '创建中...' : '创建任务'}}
+    </button>
+  </view>
+</view>

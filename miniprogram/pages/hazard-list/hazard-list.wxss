@@ -1,0 +1,138 @@
+/* pages/hazard-list/hazard-list.wxss */
+/* 隐患库 - Luminous Light */
+
+.page-container {
+  padding-bottom: 40rpx;
+}
+
+/* 筛选栏 */
+.filter-tabs {
+  background: #FFFFFF;
+  padding: 20rpx 36rpx;
+  display: flex;
+  gap: 20rpx;
+  overflow-x: auto;
+  border-bottom: 1px solid #E2E8F0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.tab-pill {
+  padding: 12rpx 32rpx;
+  background: #F1F5F9;
+  color: var(--text-sub);
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.tab-pill.active {
+  background: var(--brand-dark);
+  color: #FFF;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+/* 隐患卡片 */
+.hazard-list {
+  padding: 30rpx 36rpx;
+}
+
+.hazard-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  margin-bottom: 30rpx;
+  border: 1px solid #E2E8F0;
+  position: relative;
+}
+
+.card-status-stripe {
+  height: 6rpx;
+  width: 100%;
+}
+
+.card-status-stripe.pending { background: var(--neon-orange); }
+.card-status-stripe.rectified { background: var(--neon-cyan); }
+.card-status-stripe.completed { background: var(--neon-green); }
+
+.card-body {
+  padding: 24rpx;
+  display: flex;
+  gap: 24rpx;
+}
+
+.thumb-img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: var(--radius-sm);
+  background: #F8FAFC;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hazard-ent {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  margin-bottom: 8rpx;
+}
+
+.hazard-desc {
+  font-size: 28rpx;
+  color: var(--text-title);
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tags-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: auto;
+}
+
+.tag-mini {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.tag-level { background: #fee2e2; color: #dc2626; } /* Major */
+.tag-level-gen { background: #f3f4f6; color: #4b5563; } /* General */
+
+.tag-status { font-weight: 600; }
+.tag-status.pending { background: #ffedd5; color: #c2410c; }
+.tag-status.rectified { background: #cffafe; color: #0891b2; }
+.tag-status.completed { background: #d1fae5; color: #059669; }
+
+.card-footer {
+  padding: 16rpx 24rpx;
+  border-top: 1px solid #F1F5F9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-txt {
+  font-size: 22rpx;
+  color: var(--text-placeholder);
+}
+
+.detail-link {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+}

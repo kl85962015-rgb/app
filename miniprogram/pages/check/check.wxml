@@ -1,0 +1,110 @@
+<!--pages/check/check.wxml-->
+<view class="page-container">
+  
+  <view class="top-bar-wrapper">
+    <view class="top-bar">
+      <view class="ent-info">
+        <text class="lbl-sm">当前检查对象</text>
+        <text class="val-lg">{{enterpriseName || '请选择企业'}}</text>
+      </view>
+      <view class="hazard-count">
+        <text class="count-val">{{hazardList.length}}</text>
+        <text class="count-lbl">已发现</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-body">
+    
+    <!-- 1. 现场照片 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">现场照片 <text class="req-dot">*</text></text>
+        <text class="sec-title-en">Evidence Photo</text>
+      </view>
+      
+      <view class="grid-photos">
+        <block wx:for="{{currentHazard.images}}" wx:key="*this">
+          <view class="photo-cell">
+            <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"></image>
+            <view class="del-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
+          </view>
+        </block>
+        
+        <view class="add-cell" bindtap="takePhoto" wx:if="{{currentHazard.images.length < 9}}">
+          <text class="plus-icon">+</text>
+          <text class="add-txt">添加照片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 2. 隐患描述 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">隐患描述 <text class="req-dot">*</text></text>
+        <text class="sec-title-en">Description</text>
+      </view>
+      <textarea class="textarea-clean" placeholder="请详细描述隐患情况..." placeholder-style="color: #94A3B8" bindinput="onDescInput" value="{{currentHazard.description}}"></textarea>
+    </view>
+
+    <!-- 3. 具体位置 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">具体位置 <text class="req-dot">*</text></text>
+        <text class="sec-title-en">Location</text>
+      </view>
+      <input class="input-clean" placeholder="例如：1号车间东门配电箱" placeholder-style="color: #94A3B8" bindinput="onLocationInput" value="{{currentHazard.location}}" />
+    </view>
+
+    <!-- 4. 风险级别 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">风险级别</text>
+        <text class="sec-title-en">Risk Level</text>
+      </view>
+      <view class="level-capsules">
+        <view class="capsule {{currentHazard.level === 'general' ? 'active' : ''}}" bindtap="selectLevel" data-level="general">一般隐患</view>
+        <view class="capsule {{currentHazard.level === 'major' ? 'active' : ''}}" bindtap="selectLevel" data-level="major">重大隐患</view>
+      </view>
+    </view>
+
+    <!-- 5. 整改建议 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">整改建议</text>
+        <text class="sec-title-en">Suggestion</text>
+      </view>
+      <textarea class="textarea-clean" style="height: 160rpx;" placeholder="请输入整改建议 (选填)" placeholder-style="color: #94A3B8" bindinput="onSuggestionInput" value="{{currentHazard.suggestion}}"></textarea>
+    </view>
+
+    <!-- 6. 整改期限 -->
+    <view class="form-group-card">
+      <view class="sec-head deadline-header">
+        <view>
+          <text class="sec-title-cn">整改期限 <text class="req-dot">*</text></text>
+          <text class="sec-title-en">Deadline</text>
+        </view>
+        <view class="quick-days">
+          <view class="day-chip {{currentHazard.deadlineType === '3' ? 'active' : ''}}" bindtap="setQuickDeadline" data-days="3">3天</view>
+          <view class="day-chip {{currentHazard.deadlineType === '7' ? 'active' : ''}}" bindtap="setQuickDeadline" data-days="7">7天</view>
+        </view>
+      </view>
+      
+      <picker mode="date" value="{{currentHazard.deadline}}" start="{{today}}" bindchange="onDeadlineChange">
+        <view class="picker-wrap">
+          <text wx:if="{{currentHazard.deadline}}">{{currentHazard.deadline}}</text>
+          <text wx:else style="color: #94A3B8">请选择整改截止日期</text>
+          <text class="picker-arrow">📅</text>
+        </view>
+      </picker>
+    </view>
+
+  </view>
+
+  <!-- 底部栏 -->
+  <view class="bottom-bar">
+    <view class="btn-sec" bindtap="addAndContinue">保存继续</view>
+    <view class="btn-pri" bindtap="finishCheck">完成检查</view>
+  </view>
+
+</view>

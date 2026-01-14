@@ -1,0 +1,79 @@
+/* pages/report-list/report-list.wxss */
+/* 报告列表 - Luminous Light */
+
+.page-container {
+  padding: 30rpx 36rpx;
+}
+
+.report-item-card {
+  background: #FFF;
+  border-radius: var(--radius-md);
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.report-item-card:active {
+  background: #F8FAFC;
+}
+
+/* 左侧装饰条 */
+.left-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8rpx;
+}
+
+.left-bar.safe { background: var(--neon-green); }
+.left-bar.warning { background: var(--neon-orange); }
+
+.card-left {
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.ent-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-title);
+  margin-bottom: 8rpx;
+}
+
+.date-txt {
+  font-size: 24rpx;
+  color: var(--text-placeholder);
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.count-badge {
+  background: #F1F5F9;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  color: var(--text-sub);
+  margin-bottom: 8rpx;
+}
+
+.count-badge.has-hazard {
+  background: #FFEDD5;
+  color: #C2410C;
+}
+
+.arrow-gray {
+  font-size: 32rpx;
+  color: #CBD5E1;
+}

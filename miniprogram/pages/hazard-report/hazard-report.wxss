@@ -1,0 +1,320 @@
+/* pages/hazard-report/hazard-report.wxss */
+/* 隐患上报页面样式 - 连续上报版 */
+
+.page-container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 24rpx;
+  padding-bottom: 220rpx;
+  box-sizing: border-box;
+}
+
+/* 已添加隐患提示栏 */
+.hazard-count-bar {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24rpx;
+}
+
+.count-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.count-text {
+  font-size: 28rpx;
+  color: #1565C0;
+  font-weight: 500;
+}
+
+.count-number {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 6rpx;
+}
+
+.count-tip {
+  margin-left: auto;
+  font-size: 24rpx;
+  color: #1976D2;
+}
+
+/* 卡片区块 */
+.section {
+  margin-bottom: 20rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.required-mark {
+  color: var(--danger-color);
+  margin-left: 6rpx;
+}
+
+.section-tip {
+  font-size: 24rpx;
+  color: var(--text-placeholder);
+}
+
+/* 图片上传 */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.image-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.image-item image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-delete {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 44rpx;
+  height: 44rpx;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-delete text {
+  color: #FFFFFF;
+  font-size: 24rpx;
+}
+
+.image-add {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #F0F4F8 0%, #E8ECF0 100%);
+  border: 3rpx dashed #C0C8D0;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-add:active {
+  background: #E8ECF0;
+  border-color: var(--primary-color);
+}
+
+.add-icon {
+  font-size: 48rpx;
+  margin-bottom: 8rpx;
+}
+
+.add-text {
+  font-size: 22rpx;
+  color: #666666;
+}
+
+/* 描述输入 */
+.description-input {
+  width: 100%;
+  min-height: 160rpx;
+  padding: 20rpx;
+  background: #F8F9FA;
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 28rpx;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--text-placeholder);
+}
+
+/* 隐患级别 - 横向按钮 */
+.level-options-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.level-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  background: #F8F9FA;
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.level-btn.active.general {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border-color: #FF9800;
+}
+
+.level-btn.active.major {
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+  border-color: #F44336;
+}
+
+.level-btn-icon {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #666666;
+  margin-right: 12rpx;
+}
+
+.level-btn.active.general .level-btn-icon {
+  background: #FF9800;
+  color: #FFFFFF;
+}
+
+.level-btn.active.major .level-btn-icon {
+  background: #F44336;
+  color: #FFFFFF;
+}
+
+.level-btn-text {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.level-btn.active .level-btn-text {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* 位置输入 */
+.location-input {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 20rpx;
+  background: #F8F9FA;
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 28rpx;
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+/* 紧凑卡片 */
+.card.compact {
+  padding: 0;
+}
+
+.compact-row {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+}
+
+.compact-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.compact-label {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+  min-width: 160rpx;
+}
+
+.compact-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  text-align: right;
+  margin-right: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-placeholder {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-placeholder);
+  text-align: right;
+  margin-right: 12rpx;
+}
+
+.compact-arrow {
+  font-size: 32rpx;
+  color: var(--text-placeholder);
+}
+
+/* 底部操作区 */
+.action-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 24rpx rgba(0, 0, 0, 0.08);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16rpx;
+}
+
+.add-btn {
+  flex: 1;
+  height: 92rpx;
+  font-size: 28rpx;
+}
+
+.submit-btn {
+  flex: 1.5;
+  height: 92rpx;
+  font-size: 30rpx;
+}

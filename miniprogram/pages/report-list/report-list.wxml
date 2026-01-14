@@ -1,0 +1,25 @@
+<!--pages/report-list/report-list.wxml-->
+<view class="page-container">
+  
+  <block wx:if="{{reports.length > 0}}">
+    <view class="report-item-card" wx:for="{{reports}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="left-bar {{item.hazards.length === 0 ? 'safe' : 'warning'}}"></view>
+      <view class="card-left">
+        <text class="ent-title">{{item.enterpriseName}}</text>
+        <text class="date-txt">{{item.createTimeFormatted}}</text>
+      </view>
+      <view class="card-right">
+        <view class="count-badge {{item.hazards.length > 0 ? 'has-hazard' : ''}}">
+          {{item.hazards.length}} 隐患
+        </view>
+        <text class="arrow-gray">›</text>
+      </view>
+    </view>
+  </block>
+  
+  <view class="empty-tip" wx:else style="text-align: center; padding-top: 100rpx; color: #94A3B8;">
+    <text style="display: block; font-size: 60rpx; margin-bottom: 20rpx;">📄</text>
+    <text>暂无报告记录</text>
+  </view>
+
+</view>

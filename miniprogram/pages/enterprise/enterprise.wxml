@@ -1,0 +1,82 @@
+<!--pages/enterprise/enterprise.wxml-->
+<view class="page-container">
+  
+  <!-- 搜索栏 -->
+  <view class="search-header">
+    <view class="search-box">
+      <view class="search-icon">🔍</view>
+      <input class="search-input" placeholder="搜索企业名称 / 信用代码" placeholder-style="color: #94A3B8" bindinput="onSearchInput" value="{{searchQuery}}" />
+      <view class="clear-icon" wx:if="{{searchQuery}}" bindtap="clearSearch">×</view>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list-container">
+    <block wx:if="{{filteredList.length > 0}}">
+      <view class="ent-item-card" wx:for="{{filteredList}}" wx:key="id" bindtap="selectEnterprise" data-item="{{item}}">
+        <view class="ent-info">
+          <view class="ent-icon-badge">{{item.name[0]}}</view>
+          <view class="ent-text-col">
+            <text class="ent-name">{{item.name}}</text>
+            <text class="ent-sub" wx:if="{{item.contact}}">联系人: {{item.contact}}</text>
+          </view>
+        </view>
+        
+        <view class="action-zone">
+          <view class="select-btn" wx:if="{{mode === 'select'}}">选择</view>
+          <view class="edit-btn" wx:else catchtap="showEditModal" data-item="{{item}}">编辑</view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-tip" wx:else>
+      <text class="empty-emoji">🏢</text>
+      <text>暂无相关企业</text>
+    </view>
+  </view>
+
+  <!-- 底部添加按钮 -->
+  <view class="float-add-btn" bindtap="showAddModal">
+    <text class="plus-char">+</text>
+    <text>新增企业</text>
+  </view>
+
+  <!-- 弹窗 (完整表单) -->
+  <view class="modal-mask" wx:if="{{showModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{isEdit ? '编辑企业' : '新增企业'}}</text>
+      </view>
+      
+      <scroll-view scroll-y class="modal-body">
+        <view class="form-item">
+          <text class="label">企业名称 <text class="req">*</text></text>
+          <input class="input" placeholder="请输入全称" value="{{form.name}}" bindinput="onInput" data-field="name" />
+        </view>
+        <view class="form-item">
+          <text class="label">信用代码</text>
+          <input class="input" placeholder="统一社会信用代码" value="{{form.creditCode}}" bindinput="onInput" data-field="creditCode" />
+        </view>
+        <view class="form-item">
+          <text class="label">联系人</text>
+          <input class="input" placeholder="安全负责人姓名" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+        </view>
+        <view class="form-item">
+          <text class="label">联系电话</text>
+          <input class="input" placeholder="手机或座机" type="number" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+        </view>
+        <view class="form-item">
+          <text class="label">地址</text>
+          <input class="input" placeholder="经营地址" value="{{form.address}}" bindinput="onInput" data-field="address" />
+        </view>
+      </scroll-view>
+
+      <view class="modal-actions">
+        <view class="modal-btn cancel-btn" bindtap="hideModal">取消</view>
+        <view class="modal-btn confirm-btn" bindtap="confirmSave">保存</view>
+      </view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,77 @@
+<!--pages/index/index.wxml-->
+<view class="page-container">
+  
+  <!-- 顶部主操作卡片 -->
+  <view class="top-card">
+    <view class="today-label">今日概览</view>
+    <view class="progress-container">
+      <view class="progress-track">
+        <view class="progress-fill" style="width: {{completionRate}}%"></view>
+      </view>
+      <view class="progress-text">
+        <text class="percent-num">{{completionRate}}%</text>
+        <text class="percent-label">安全指数</text>
+      </view>
+    </view>
+    <view class="main-action-btn" bindtap="startCheck">
+      <text class="btn-txt">开始检查</text>
+    </view>
+  </view>
+
+  <!-- 功能方块：精准复刻版 -->
+  <view class="function-grid">
+    
+    <!-- 1. 安全巡检 (Blue + Shield) -->
+    <view class="func-card" bindtap="startCheck">
+      <!-- 上半部渐变 -->
+      <view class="card-header-bg bg-blue">
+        <!-- 核心：悬浮玻璃盒子 -->
+        <view class="glass-icon-box">
+          <view class="icon-img icon-shield"></view>
+        </view>
+      </view>
+      <!-- 下半部文字 -->
+      <view class="card-footer">
+        <text class="func-label">安全巡检</text>
+      </view>
+    </view>
+
+    <!-- 2. 隐患整改 (Purple + Fire/Tool) -->
+    <view class="func-card" bindtap="goToHazardList">
+      <view class="card-header-bg bg-purple">
+        <view class="glass-icon-box">
+          <view class="icon-img icon-fire"></view>
+        </view>
+      </view>
+      <view class="card-footer">
+        <text class="func-label">隐患整改</text>
+      </view>
+    </view>
+
+    <!-- 3. 设备维护 (Orange + Wrench) -->
+    <view class="func-card" bindtap="goToEnterprise">
+      <view class="card-header-bg bg-orange">
+        <view class="glass-icon-box">
+          <view class="icon-img icon-wrench"></view>
+        </view>
+      </view>
+      <view class="card-footer">
+        <text class="func-label">设备维护</text>
+      </view>
+    </view>
+
+    <!-- 4. 数据分析 (Green + Chart) -->
+    <view class="func-card" bindtap="goToReportList">
+      <view class="card-header-bg bg-green">
+        <view class="glass-icon-box">
+          <view class="icon-img icon-chart"></view>
+        </view>
+      </view>
+      <view class="card-footer">
+        <text class="func-label">数据分析</text>
+      </view>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,9 @@
+<!--pages/regulation/regulation.wxml-->
+<!-- 依据库 - 占位页 -->
+<view class="page">
+  <view class="empty-state">
+    <text class="empty-icon">📚</text>
+    <text class="empty-title">安全依据库</text>
+    <text class="empty-desc">相关法律法规与安全标准正在录入中...</text>
+  </view>
+</view>

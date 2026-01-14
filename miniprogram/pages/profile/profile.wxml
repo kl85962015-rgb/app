@@ -1,0 +1,67 @@
+<!--pages/profile/profile.wxml-->
+<view class="page-container">
+  
+  <!-- 头部：极简中心布局 -->
+  <view class="profile-header-light">
+    <view class="avatar-shadow">
+      <image src="{{userInfo.avatar}}" mode="aspectFill" wx:if="{{userInfo.avatar}}"></image>
+      <text wx:else style="color: #FFF; font-size: 40rpx; font-weight: bold;">{{userInfo.name[0]}}</text>
+    </view>
+    <text class="user-name-tech">{{userInfo.name}}</text>
+    <view class="role-chip">
+      <text>{{userInfo.role}} · {{userInfo.department}}</text>
+    </view>
+  </view>
+
+  <!-- 数据条：悬浮纯白 -->
+  <view class="stats-float">
+    <view class="light-card stats-row-card">
+      <view class="stat-col" bindtap="goToMyHazards">
+        <text class="stat-val num-display">{{stats.hazardCount}}</text>
+        <text class="stat-lbl">隐患上报</text>
+      </view>
+      <view class="vert-line"></view>
+      <view class="stat-col" bindtap="goToMyTasks">
+        <text class="stat-val num-display">{{stats.taskCount}}</text>
+        <text class="stat-lbl">排查任务</text>
+      </view>
+      <view class="vert-line"></view>
+      <view class="stat-col">
+        <text class="stat-val num-display">95</text>
+        <text class="stat-lbl">信誉分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-list-area">
+    <view class="light-card menu-card">
+      <view class="menu-row border-bottom" bindtap="goToMyHazards">
+        <text class="menu-txt">我上报的隐患</text>
+        <view class="row-right">
+          <view class="badge-num" wx:if="{{pendingRectify > 0}}">{{pendingRectify}}</view>
+          <text class="arr">›</text>
+        </view>
+      </view>
+      <view class="menu-row border-bottom" bindtap="goToMyTasks">
+        <text class="menu-txt">我的排查任务</text>
+        <text class="arr">›</text>
+      </view>
+      <view class="menu-row" bindtap="goToNotification">
+        <text class="menu-txt">消息通知</text>
+        <text class="arr">›</text>
+      </view>
+    </view>
+    
+    <view class="light-card menu-card mt-24">
+      <view class="menu-row border-bottom" bindtap="goToSettings">
+        <text class="menu-txt">系统设置</text>
+        <text class="arr">›</text>
+      </view>
+      <view class="menu-row" bindtap="switchAccount">
+        <text class="menu-txt">切换账号</text>
+        <text class="arr">›</text>
+      </view>
+    </view>
+  </view>
+</view>

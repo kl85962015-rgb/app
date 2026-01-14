@@ -1,0 +1,74 @@
+<!--pages/hazard-detail/hazard-detail.wxml-->
+<view class="page-container" wx:if="{{hazard}}">
+  
+  <!-- 大图轮播 -->
+  <view style="padding: 30rpx 36rpx 0;">
+    <swiper class="photo-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#FFF">
+      <block wx:for="{{hazard.photos}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode="aspectFill" bindtap="previewImage" data-current="{{item}}"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 状态头 -->
+  <view class="status-header">
+    <view class="status-left">
+      <view class="field-label">当前状态</view>
+      <text class="status-label-lg {{hazard.status}}">{{statusText}}</text>
+    </view>
+    <view class="time-badge">{{hazard.createTimeFormatted}}</view>
+  </view>
+
+  <!-- 信息内容 -->
+  <view class="detail-body">
+    
+    <view class="detail-card">
+      <view class="field-group">
+        <view class="field-label">所属企业</view>
+        <view class="field-content-bold">{{hazard.enterpriseName}}</view>
+      </view>
+      
+      <view class="field-group">
+        <view class="field-label">具体位置</view>
+        <view class="field-content">{{hazard.location || '未填写'}}</view>
+      </view>
+
+      <view class="field-group">
+        <view class="field-label">风险级别</view>
+        <view class="field-content" style="color: {{hazard.level === 'major' ? '#DC2626' : '#64748B'}}">
+          {{hazard.level === 'major' ? '⚠️ 重大隐患' : '一般隐患'}}
+        </view>
+      </view>
+    </view>
+
+    <view class="detail-card">
+      <view class="field-label">隐患描述</view>
+      <view class="field-content">{{hazard.description}}</view>
+    </view>
+
+    <!-- 整改记录 -->
+    <view class="detail-card" wx:if="{{hazard.rectifyPhotos && hazard.rectifyPhotos.length > 0}}">
+      <view class="field-label">整改/验收记录</view>
+      <view class="grid-photos" style="margin-top: 20rpx; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20rpx;">
+        <image wx:for="{{hazard.rectifyPhotos}}" wx:key="*this" src="{{item}}" mode="aspectFill" style="width:100%; aspect-ratio:1; border-radius: 12rpx; border: 1px solid #E2E8F0;" bindtap="previewRectifyImage" data-current="{{item}}"></image>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 底部操作坞 -->
+  <view class="action-dock" wx:if="{{hazard.status !== 'completed'}}">
+    <!-- 待整改状态：显示上传整改 -->
+    <block wx:if="{{hazard.status === 'pending'}}">
+      <view class="dock-btn btn-upload" bindtap="chooseRectifyImage">上传整改照片</view>
+    </block>
+    <!-- 待验收状态：显示通过/退回 -->
+    <block wx:if="{{hazard.status === 'rectified'}}">
+      <view class="dock-btn btn-reject" bindtap="rejectRectify">退回</view>
+      <view class="dock-btn btn-pass" bindtap="approveRectify">通过验收</view>
+    </block>
+  </view>
+
+</view>

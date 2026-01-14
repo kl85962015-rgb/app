@@ -1,0 +1,61 @@
+<!--pages/task-detail/task-detail.wxml-->
+<view class="page-container">
+  <view class="task-header card">
+    <view class="status-badge {{task.status}}">
+      {{task.status === 'pending' ? '待执行' : task.status === 'processing' ? '进行中' : '已完成'}}
+    </view>
+    <text class="task-title">{{task.title}}</text>
+    <view class="task-meta">
+      <text>创建时间: {{task.createTime}}</text>
+      <text>截止日期: {{task.deadline}}</text>
+    </view>
+  </view>
+
+  <view class="info-section card">
+    <view class="info-row">
+      <text class="info-label">检查企业</text>
+      <text class="info-value">{{task.enterpriseName}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">执行人</text>
+      <text class="info-value">{{task.assigneeName}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">创建人</text>
+      <text class="info-value">{{task.creatorName}}</text>
+    </view>
+  </view>
+
+  <view class="content-section card" wx:if="{{task.content}}">
+    <view class="section-title">任务内容</view>
+    <text class="content-text">{{task.content}}</text>
+  </view>
+
+  <view class="hazards-section card">
+    <view class="section-header">
+      <text class="section-title">发现隐患</text>
+      <text class="hazard-count">{{task.hazards.length}}个</text>
+    </view>
+    
+    <view class="hazard-item" wx:for="{{task.hazards}}" wx:key="id">
+      <image class="hazard-img" src="{{item.images[0]}}" mode="aspectFill"></image>
+      <view class="hazard-info">
+        <text class="hazard-desc">{{item.description}}</text>
+        <view class="hazard-tags">
+          <text class="level-tag {{item.level}}">{{item.level === 'major' ? '重大' : '一般'}}</text>
+          <text class="status-tag {{item.status}}">{{item.status === 'completed' ? '已整改' : item.status === 'processing' ? '整改中' : '待整改'}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-hazards" wx:if="{{task.hazards.length === 0}}">
+      <text>暂无发现隐患</text>
+    </view>
+  </view>
+
+  <view class="actions" wx:if="{{task.status !== 'completed'}}">
+    <button class="btn btn-outline" bindtap="addHazard">上报隐患</button>
+    <button class="btn btn-primary" bindtap="completeTask" wx:if="{{task.status === 'processing'}}">完成任务</button>
+    <button class="btn btn-primary" bindtap="startTask" wx:else>开始执行</button>
+  </view>
+</view>
