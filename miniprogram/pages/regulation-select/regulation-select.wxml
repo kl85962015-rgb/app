@@ -1,0 +1,135 @@
+<!--pages/regulation-select/regulation-select.wxml-->
+<view class="page-container">
+  
+  <!-- 顶部 Tab 栏 -->
+  <view class="top-tabs">
+    <scroll-view class="tabs-scroll" scroll-x enable-flex>
+      <view class="tab-item {{activeTab === 'professional' ? 'active' : ''}}" bindtap="switchTab" data-tab="professional">专业依据</view>
+      <view class="tab-item {{activeTab === 'common' ? 'active' : ''}}" bindtap="switchTab" data-tab="common">常用依据</view>
+      <view class="tab-item {{activeTab === 'favorite' ? 'active' : ''}}" bindtap="switchTab" data-tab="favorite">我的收藏</view>
+      <view class="tab-item {{activeTab === 'history' ? 'active' : ''}}" bindtap="switchTab" data-tab="history">历史依据</view>
+      <view class="tab-item {{activeTab === 'manual' ? 'active' : ''}}" bindtap="switchTab" data-tab="manual">手动依据</view>
+    </scroll-view>
+  </view>
+
+  <!-- 专业依据模式：左右布局 -->
+  <view class="professional-layout" wx:if="{{activeTab === 'professional'}}">
+    
+    <!-- 左侧分类列表 -->
+    <scroll-view class="category-sidebar" scroll-y>
+      <view class="cat-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="id"
+            bindtap="selectCategory" data-id="{{item.id}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+    
+    <!-- 右侧依据网格 -->
+    <scroll-view class="regulation-grid-area" scroll-y>
+      <view class="grid-container">
+        <view class="grid-item" wx:for="{{categoryItems}}" wx:key="id" bindtap="selectRegulationItem" data-item="{{item}}">
+          <view class="grid-icon" style="background: {{item.iconBg || '#EFF6FF'}}">
+            <text class="icon-emoji">{{item.icon || '📋'}}</text>
+          </view>
+          <text class="grid-label">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    
+  </view>
+
+  <!-- 列表模式（常用/收藏/历史） -->
+  <view class="list-layout" wx:if="{{activeTab !== 'professional' && activeTab !== 'manual'}}">
+    
+    <!-- 搜索框 -->
+    <view class="search-bar">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索" bindinput="onSearchInput" value="{{searchKeyword}}" />
+    </view>
+    
+    <!-- 筛选标签 -->
+    <view class="filter-tag-bar">
+      <view class="filter-tag active">全部</view>
+    </view>
+    
+    <!-- 法规卡片列表 -->
+    <scroll-view class="regulation-card-list" scroll-y>
+      <view class="reg-card" wx:for="{{regulationList}}" wx:key="id">
+        <view class="card-header">
+          <text class="keyword-label">【关键词】</text>
+          <text class="keyword-text">{{item.keywords}}</text>
+        </view>
+        
+        <view class="card-row">
+          <text class="row-label">【隐患描述】</text>
+          <text class="row-content">{{item.description}}</text>
+        </view>
+        
+        <view class="card-row">
+          <text class="row-label">【整改建议】</text>
+          <text class="row-content">{{item.suggestion}}</text>
+        </view>
+        
+        <view class="card-row">
+          <text class="region-icon">📍</text>
+          <text class="region-text">适用地区：{{item.region || '全国'}}</text>
+        </view>
+        
+        <!-- 展开详情 -->
+        <view class="card-detail" wx:if="{{expandedId === item.id}}">
+          <view class="card-row">
+            <text class="row-label">【法律原文】</text>
+            <text class="row-content">{{item.legalText}}</text>
+          </view>
+          <view class="card-row">
+            <text class="row-label">【法律法规】</text>
+            <text class="law-link">{{item.lawName}}</text>
+          </view>
+        </view>
+        
+        <!-- 操作按钮 -->
+        <view class="card-actions">
+          <view class="action-btn" bindtap="toggleDetail" data-id="{{item.id}}">
+            <text class="action-icon">📋</text>
+            <text>详细</text>
+          </view>
+          <view class="action-btn" bindtap="toggleFavorite" data-id="{{item.id}}">
+            <text class="action-icon">{{item.isFavorite ? '⭐' : '☆'}}</text>
+            <text>收藏</text>
+          </view>
+          <view class="action-btn {{isSelected(item.id) ? 'selected' : ''}}" bindtap="toggleSelect" data-item="{{item}}">
+            <text class="action-icon">{{isSelected(item.id) ? '✓' : '⊕'}}</text>
+            <text>选择</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="empty-tip" wx:if="{{regulationList.length === 0}}">
+        <text>暂无数据</text>
+      </view>
+    </scroll-view>
+    
+  </view>
+
+  <!-- 手动输入模式 -->
+  <view class="manual-layout" wx:if="{{activeTab === 'manual'}}">
+    <view class="manual-form">
+      <view class="form-group">
+        <text class="form-label">法规名称</text>
+        <input class="form-input" placeholder="请输入法规名称" bindinput="onManualNameInput" value="{{manualRegulation.name}}" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">法规条款</text>
+        <textarea class="form-textarea" placeholder="请输入具体法规条款内容" bindinput="onManualContentInput" value="{{manualRegulation.content}}" />
+      </view>
+      <view class="manual-add-btn" bindtap="addManualRegulation">添加该法规</view>
+    </view>
+  </view>
+
+  <!-- 已选法规栏 -->
+  <view class="selected-bar" wx:if="{{selectedRegulations.length > 0}}">
+    <view class="selected-count">已选 {{selectedRegulations.length}} 条</view>
+    <view class="confirm-btn" bindtap="confirmSelection">确定</view>
+  </view>
+
+</view>

@@ -326,3 +326,55 @@
   font-size: 32rpx;
   box-shadow: 0 16rpx 32rpx rgba(59, 130, 246, 0.3); /* 蓝色投影 */
 }
+
+/* ===== 法规依据列表（已选） ===== */
+.selected-regulations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.regulation-tag {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  border: 1px solid #BFDBFE;
+  border-radius: 20rpx;
+  padding: 12rpx 20rpx;
+  max-width: 100%;
+}
+
+.tag-text {
+  font-size: 26rpx;
+  color: #1E40AF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 400rpx;
+}
+
+.tag-remove {
+  margin-left: 12rpx;
+  font-size: 28rpx;
+  color: #64748B;
+  padding: 0 8rpx;
+}
+
+.add-regulation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  background: #F8FAFC;
+  border: 2px dashed #CBD5E1;
+  border-radius: 20rpx;
+  color: #64748B;
+  font-size: 28rpx;
+}
+
+.add-icon-small {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+  color: #94A3B8;
+}

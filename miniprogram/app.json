@@ -8,6 +8,7 @@
         "pages/report-result/report-result",
         "pages/report-list/report-list",
         "pages/regulation/regulation",
+        "pages/regulation-select/regulation-select",
         "pages/profile/profile"
     ],
     "window": {

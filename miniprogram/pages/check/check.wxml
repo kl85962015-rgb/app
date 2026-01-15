@@ -68,7 +68,29 @@
       </view>
     </view>
 
-    <!-- 5. 整改建议 -->
+    <!-- 5. 法规依据 -->
+    <view class="form-group-card">
+      <view class="sec-head">
+        <text class="sec-title-cn">法规依据</text>
+        <text class="sec-title-en">Legal Basis</text>
+      </view>
+      
+      <!-- 已选法规列表 -->
+      <view class="selected-regulations" wx:if="{{currentHazard.regulations.length > 0}}">
+        <view class="regulation-tag" wx:for="{{currentHazard.regulations}}" wx:key="id">
+          <text class="tag-text">{{item.title}}</text>
+          <text class="tag-remove" catchtap="removeRegulation" data-id="{{item.id}}">×</text>
+        </view>
+      </view>
+      
+      <!-- 选择法规按钮 -->
+      <view class="add-regulation-btn" bindtap="showRegulationPicker">
+        <text class="add-icon-small">+</text>
+        <text>添加法规依据</text>
+      </view>
+    </view>
+
+    <!-- 6. 整改建议 -->
     <view class="form-group-card">
       <view class="sec-head">
         <text class="sec-title-cn">整改建议</text>
@@ -77,7 +99,7 @@
       <textarea class="textarea-clean" style="height: 160rpx;" placeholder="请输入整改建议 (选填)" placeholder-style="color: #94A3B8" bindinput="onSuggestionInput" value="{{currentHazard.suggestion}}"></textarea>
     </view>
 
-    <!-- 6. 整改期限 -->
+    <!-- 7. 整改期限 -->
     <view class="form-group-card">
       <view class="sec-head deadline-header">
         <view>
@@ -106,5 +128,7 @@
     <view class="btn-sec" bindtap="addAndContinue">保存继续</view>
     <view class="btn-pri" bindtap="finishCheck">完成检查</view>
   </view>
+
+
 
 </view>

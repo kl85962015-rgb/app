@@ -14,7 +14,8 @@ Page({
             level: 'general',
             suggestion: '',
             deadline: '',
-            deadlineType: ''
+            deadlineType: '',
+            regulations: []
         }
     },
 
@@ -97,6 +98,39 @@ Page({
         });
     },
 
+    // ===== 法规依据相关方法 =====
+
+    // 跳转到法规选择页面
+    showRegulationPicker() {
+        const that = this;
+        wx.navigateTo({
+            url: '/pages/regulation-select/regulation-select',
+            events: {
+                // 监听被打开页面发送的数据
+                acceptDataFromOpenedPage: function (data) {
+                    if (data && data.selectedRegulations) {
+                        that.setData({
+                            'currentHazard.regulations': data.selectedRegulations
+                        });
+                    }
+                }
+            },
+            success: function (res) {
+                // 发送当前已选中的法规给被打开页面
+                res.eventChannel.emit('acceptDataFromOpenerPage', {
+                    selectedRegulations: that.data.currentHazard.regulations
+                })
+            }
+        });
+    },
+
+    // 移除已选法规
+    removeRegulation(e) {
+        const id = e.currentTarget.dataset.id;
+        const regulations = this.data.currentHazard.regulations.filter(r => r.id !== id);
+        this.setData({ 'currentHazard.regulations': regulations });
+    },
+
     // 验证当前隐患
     validateHazard() {
         const h = this.data.currentHazard;
@@ -138,7 +172,8 @@ Page({
                 level: 'general',
                 suggestion: '',
                 deadline: '',
-                deadlineType: ''
+                deadlineType: '',
+                regulations: []
             }
         });
 
