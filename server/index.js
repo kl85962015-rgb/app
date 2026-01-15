@@ -33,7 +33,7 @@ const regulationRoutes = require('./routes/regulations');
 const taskRoutes = require('./routes/tasks');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 // 中间件
 app.use(cors());
