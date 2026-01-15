@@ -16,10 +16,12 @@ page {
   --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
   --card-border: 1px solid rgba(226, 232, 240, 0.8);
 
-  /* 核心主色：Deep Ocean 的遗留，保持科技感 */
-  --brand-blue: #2563EB;     /* 专业蓝 */
+  /* 核心主色：与品牌 Logo 一致的蓝绿渐变 */
+  --brand-blue: #3B82F6;     /* 品牌蓝 */
+  --brand-green: #10B981;    /* 品牌绿 */
   --brand-cyan: #0891B2;     /* 科技青 */
   --brand-dark: #0F172A;     /* 深邃黑（用于标题） */
+  --brand-gradient: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
 
   /* 辅助霓虹（作为点缀） */
   --accent-cyan: #E0F2FE;    /* 浅青背景 */
@@ -75,14 +77,14 @@ page {
 
 /* === 按钮：流光科技 === */
 .btn-tech {
-  background: var(--brand-dark);
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
   color: #FFFFFF;
   border-radius: var(--radius-md);
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
   transition: all 0.2s;
   position: relative;
   overflow: hidden;

@@ -116,7 +116,7 @@
 
 .select-btn {
   padding: 12rpx 24rpx;
-  background: #0F172A;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
   color: #FFF;
   font-size: 24rpx;
   border-radius: 12rpx;
@@ -146,14 +146,14 @@
   bottom: 60rpx; /* 提高一点避免被遮挡 */
   left: 50%;
   transform: translateX(-50%);
-  background: #0F172A;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
   color: #FFF;
   height: 96rpx;
   padding: 0 48rpx;
   border-radius: 48rpx;
   display: flex;
   align-items: center;
-  box-shadow: 0 16rpx 40rpx rgba(15, 23, 42, 0.3);
+  box-shadow: 0 16rpx 40rpx rgba(59, 130, 246, 0.35);
   z-index: 99; /* 足够高的层级 */
   font-size: 30rpx;
   font-weight: 600;
@@ -268,6 +268,6 @@
 }
 
 .confirm-btn {
-  background: #0F172A;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
   color: #FFF;
 }

@@ -265,7 +265,7 @@
 }
 
 .day-chip.active {
-  background: #0F172A;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
   color: #FFF;
 }
 
@@ -316,7 +316,7 @@
 .btn-pri {
   flex: 1;
   height: 108rpx;
-  background: #0F172A; /* 高级黑 */
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); /* 品牌蓝绿渐变 */
   color: #FFF;
   display: flex;
   align-items: center;
@@ -324,5 +324,5 @@
   border-radius: 36rpx;
   font-weight: 600;
   font-size: 32rpx;
-  box-shadow: 0 16rpx 32rpx rgba(15, 23, 42, 0.25); /* 强烈投影 */
+  box-shadow: 0 16rpx 32rpx rgba(59, 130, 246, 0.3); /* 蓝色投影 */
 }

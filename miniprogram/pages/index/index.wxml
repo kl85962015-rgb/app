@@ -1,6 +1,15 @@
 <!--pages/index/index.wxml-->
 <view class="page-container">
   
+  <!-- 品牌头部 -->
+  <view class="brand-header">
+    <image class="brand-logo" src="/assets/logo.png" mode="aspectFit"></image>
+    <view class="brand-info">
+      <text class="brand-name">嘉安托管</text>
+      <text class="brand-slogan">安全生产，从排查开始</text>
+    </view>
+  </view>
+
   <!-- 顶部主操作卡片 -->
   <view class="top-card">
     <view class="today-label">今日概览</view>

@@ -6,7 +6,45 @@
   position: relative;
   background-color: #F8FAFC;
   overflow: hidden;
-  padding: 140rpx 40rpx 40rpx;
+  padding: 40rpx 40rpx 40rpx;
+}
+
+/* === 品牌头部 === */
+.brand-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.brand-logo {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 22rpx;
+  box-shadow: 0 8rpx 24rpx rgba(16, 185, 129, 0.15);
+  margin-right: 24rpx;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-slogan {
+  font-size: 24rpx;
+  color: #64748B;
+  margin-top: 4rpx;
 }
 
 /* === 顶部卡片 === */
@@ -66,12 +104,12 @@
 
 .main-action-btn {
   height: 96rpx;
-  background: #0F172A;
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); /* 品牌蓝绿渐变 */
   border-radius: 32rpx; /* 与功能卡片一致的圆角风格 */
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.2);
+  box-shadow: 0 12rpx 24rpx rgba(59, 130, 246, 0.25);
 }
 
 .btn-txt {
@@ -115,7 +153,7 @@
   justify-content: center; /* 确保水平居中 */
 }
 
-.bg-blue   { background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%); }
+.bg-blue   { background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); }
 .bg-purple { background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%); }
 .bg-orange { background: linear-gradient(135deg, #F97316 0%, #FBBF24 100%); }
 .bg-green  { background: linear-gradient(135deg, #10B981 0%, #34D399 100%); }

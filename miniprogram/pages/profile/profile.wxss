@@ -1,7 +1,7 @@
 /* pages/profile/profile.wxss */
 .profile-header-light {
   padding: 60rpx 0 80rpx; /* 底部留空间给悬浮卡片 */
-  background: var(--brand-dark); /* 深色头部背景 */
+  background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); /* 品牌蓝绿渐变 */
   display: flex;
   flex-direction: column;
   align-items: center;
